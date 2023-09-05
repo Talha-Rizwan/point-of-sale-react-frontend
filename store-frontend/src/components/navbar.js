@@ -7,7 +7,7 @@ const Navbar = () => {
                         <a rel="noopener noreferrer" href="/" className="flex items-center px-4 -mb-1 hover:border-b-2">Home</a>
                     </li>
                     <li className="flex hover:text-white">
-                        <a rel="noopener noreferrer" href="/about" className="flex items-center px-4 -mb-1 hover:border-b-2">About</a>
+                        <a rel="noopener noreferrer" href="/add" className="flex items-center px-4 -mb-1 hover:border-b-2">Add Product</a>
                     </li>
                 </ul>
             </div>
