@@ -1,14 +1,7 @@
 import { useNavigate} from 'react-router-dom';
 
-
-
 const Item = (props) => {
     let navigate = useNavigate()
-
-    function UpdateItem(){
-        navigate('/update', { state: { itemData: props.item } });
-    }
-
 
     return (
         <div className="container max-w-sm mx-auto hover:bg-slate-100 ">
@@ -20,12 +13,17 @@ const Item = (props) => {
             <div className="flex justify-end">
                 <button
                     className="mx-2 bg-slate-400 hover:bg-slate-700 text-white font-bold p-3 rounded "
-                    onClick={UpdateItem}
+                    onClick={()=>{
+                        navigate('/update', { state: { itemData: props.item } });
+                    }}
                 >
                     Update
                 </button>
                 <button
                     className="mx-2 bg-red-400 hover:bg-red-700 text-white font-bold p-3 rounded"
+                    onClick={()=>{
+                        navigate('/delete', { state: { itemData: props.item } });
+                    }}
                 >
                     Delete
                 </button>

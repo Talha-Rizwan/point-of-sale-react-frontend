@@ -6,7 +6,6 @@ function UpdateForm() {
   let navigate = useNavigate()
   const location = useLocation();
   const itemData = location.state?.itemData;
-  console.log("the data is : ", itemData)
   const [formData, setFormData] = useState({
     title: itemData.title,
     price: itemData.price,
