@@ -27,13 +27,11 @@ function UpdateForm() {
     e.preventDefault();
 
     const formDataToSend = new FormData();
-      formDataToSend.append('title', formData.title);
-      formDataToSend.append('price', formData.price);
-      formDataToSend.append('description', formData.description);
-      formDataToSend.append('image', formData.image);
-     
-      console.log('the formdata is : ', formData)
-
+    formDataToSend.append('title', formData.title);
+    formDataToSend.append('price', formData.price);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('image', formData.image);
+    
     axios.put('https://fakestoreapi.com/products/'+itemData.id, formDataToSend)
     .then((response) => {
       console.log('Data sent successfully:', response.data);

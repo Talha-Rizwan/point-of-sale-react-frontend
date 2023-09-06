@@ -31,7 +31,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1 className = "text-center m-5 underline text-3xl font-bold"> Products</h1>
+            <h1 className = "text-center m-5 underline text-xl md:text-3xl font-bold"> Products</h1>
             <SearchBar searchFtn={handleSearchChange}/>
             <Products filteredItems={filteredItems}/>
         </div>

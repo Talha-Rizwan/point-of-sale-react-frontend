@@ -93,7 +93,8 @@ function AddForm() {
             className="rounded w-full p-2 "
             rows="4"
           ></textarea>
-          <div className="mb-4">
+        </div>
+        <div className="mb-4">
           <label htmlFor="image" className="block text-sm font-bold mb-2">
             Image:
           </label>
@@ -105,13 +106,12 @@ function AddForm() {
             accept=".jpg, .jpeg, .png" 
           />
         </div>
-        </div>
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
-          >
-            Submit
-          </button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
