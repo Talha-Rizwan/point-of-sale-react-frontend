@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Form() {
+function AddForm() {
   const [formData, setFormData] = useState({
     title: '',
     price: '',
@@ -89,4 +89,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default AddForm;
