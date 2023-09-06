@@ -1,10 +1,11 @@
-// src/components/Form.js
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function Form() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    title: '',
+    price: '',
+    description: '',
   });
 
   const handleChange = (e) => {
@@ -14,43 +15,58 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to the server
-    console.log(formData);
+
+    axios.post('https://fakestoreapi.com/products', formData)
+    .then((response) => {
+      console.log('Data sent successfully:', response.data);
+      
+      if (response.status === 200){
+        alert("The product "+ formData.title + " has been added!")
+      }
+      setFormData({
+        title: '',
+        price: '',
+        description: '',
+      })
+    })
+    .catch((error) => {
+      console.error('Error sending data:', error);
+    });
   };
 
   return (
     <div className="max-w-md mx-auto mt-8 ">
       <form onSubmit={handleSubmit} className="bg-slate-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+          <label htmlFor="name" className="block text-sm font-bold mb-2">
             Title:
           </label>
           <input
             type="text"
             id="title"
             name="title"
-            value={formData.name}
+            value={formData.title}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full p-2 "
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-            Price:
+          <label htmlFor="name" className="block text-sm font-bold mb-2">
+            Price ($):
           </label>
           <input
-            type="text"
+            type="number"
             id="price"
             name="price"
-            value={formData.name}
+            value={formData.price}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full p-2"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+          <label htmlFor="description" className="block text-sm font-bold mb-2">
             Description:
           </label>
           <textarea
@@ -58,18 +74,16 @@ function Form() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="rounded w-full p-2 "
             rows="4"
           ></textarea>
         </div>
-        <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
           >
             Submit
           </button>
-        </div>
       </form>
     </div>
   );
