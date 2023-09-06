@@ -10,17 +10,31 @@ function UpdateForm() {
     title: itemData.title,
     price: itemData.price,
     description: itemData.description,
+    image: itemData.image,
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, files } = e.target;
+    
+    if (name === 'image') {
+      setFormData({ ...formData, [name]: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.put('https://fakestoreapi.com/products/'+itemData.id, formData)
+    const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('price', formData.price);
+      formDataToSend.append('description', formData.description);
+      formDataToSend.append('image', formData.image);
+     
+      console.log('the formdata is : ', formData)
+
+    axios.put('https://fakestoreapi.com/products/'+itemData.id, formDataToSend)
     .then((response) => {
       console.log('Data sent successfully:', response.data);
       
@@ -82,6 +96,18 @@ function UpdateForm() {
             className="rounded w-full p-2 "
             rows="4"
           ></textarea>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="image" className="block text-sm font-bold mb-2">
+            Image:
+          </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            onChange={handleChange}
+            accept=".jpg, .jpeg, .png" 
+          />
         </div>
           <button
             type="submit"
