@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 
-function AddForm() {
+const AddForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     price: "",

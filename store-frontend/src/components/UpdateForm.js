@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 
-function UpdateForm() {
+const UpdateForm = () => {
   let navigate = useNavigate();
   const location = useLocation();
   const itemData = location.state?.itemData;
