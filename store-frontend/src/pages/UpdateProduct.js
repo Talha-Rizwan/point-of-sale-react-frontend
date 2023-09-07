@@ -1,4 +1,4 @@
-import UpdateForm from "../components/UpdateForm";
+import UpdateProductForm from "../components/UpdateProductForm";
 const UpdateProduct = () => {
   return (
     <div>
@@ -6,7 +6,7 @@ const UpdateProduct = () => {
         {" "}
         Update Product
       </h1>
-      <UpdateForm />
+      <UpdateProductForm />
     </div>
   );
 };

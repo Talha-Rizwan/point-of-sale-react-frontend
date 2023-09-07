@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 
-const UpdateForm = () => {
-  let navigate = useNavigate();
-  const location = useLocation();
-  const itemData = location.state?.itemData;
+const AddProductForm = () => {
   const [formData, setFormData] = useState({
-    title: itemData.title,
-    price: itemData.price,
-    description: itemData.description,
-    image: itemData.image,
+    title: "",
+    price: "",
+    description: "",
+    image: null,
   });
 
   const onDrop = (acceptedFiles) => {
@@ -26,11 +22,10 @@ const UpdateForm = () => {
         if (img.width <= 200 && img.height <= 200) {
           setFormData({ ...formData, image });
         } else {
-          alert("Image dimensions must be 200x200 pixels or smaller.");
+          alert("Image dimensions must not be more than 200x200 pixels.");
         }
       };
     };
-
     reader.readAsDataURL(image);
   };
 
@@ -48,34 +43,29 @@ const UpdateForm = () => {
     e.preventDefault();
 
     axios
-      .put("https://fakestoreapi.com/products/" + itemData.id, formData)
+      .post("https://fakestoreapi.com/products", formData)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
 
         if (response.status === 200) {
-          alert(
-            "The product " + formData.title + " has been successfully updated!"
-          );
+          alert("The product " + formData.title + " has been added!");
         }
         setFormData({
           title: "",
           price: "",
           description: "",
+          image: null,
         });
-        navigate("/");
       })
       .catch((error) => {
-        alert('Error Updating data!')
+        alert('Error submitting data!')
         console.error("Error :", error);
       });
   };
 
   return (
     <div className="max-w-md mx-auto mt-8 ">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-slate-200 shadow-md rounded p-8 mb-4"
-      >
+      <form onSubmit={handleSubmit} className="bg-slate-200 p-8 mb-4">
         <div className="mb-4">
           <label htmlFor="name" className="block font-bold mb-2">
             Title:
@@ -124,10 +114,7 @@ const UpdateForm = () => {
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             {formData.image ? (
-              <p className="border border-blue-500 border-dashed p-2">
-                File already uploaded, click to Browse or drag image here (max
-                200x200 pixels)
-              </p>
+              <p>{formData.image.name}</p>
             ) : (
               <p className="border border-blue-500 border-dashed p-2">
                 Drag an image (max 200x200 pixels) here, or click to Browse
@@ -146,4 +133,4 @@ const UpdateForm = () => {
   );
 }
 
-export default UpdateForm;
+export default AddProductForm;
