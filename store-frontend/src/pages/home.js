@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axios
@@ -20,13 +21,13 @@ const Home = () => {
   }, []);
 
   const handleSearchChange = (event) => {
-    setSearch(event.target.value);
+    setSearchQuery(event.target.value);
   };
 
   const filteredItems = products?.filter(
     (item) =>
-      item.title.toLowerCase().includes(search.toLowerCase()) ||
-      item.category.toLowerCase().includes(search.toLowerCase())
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (

@@ -4,7 +4,7 @@ import axios from "axios";
 const DeleteModel = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const itemData = location.state?.itemData;
+  const { itemData } = location.state;
 
   const handleDelete = (e) => {
     axios

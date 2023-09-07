@@ -1,4 +1,5 @@
 import UpdateProductForm from "../components/UpdateProductForm";
+
 const UpdateProduct = () => (
     <div>
       <h1 className="text-center m-5 underline text-3xl font-bold">
