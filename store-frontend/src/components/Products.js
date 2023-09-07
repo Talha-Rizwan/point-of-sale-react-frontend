@@ -1,12 +1,11 @@
-import Item from "./Item";
+import ProductCard from "./ProductCard";
 
-const Products = (props) => {
-  return (
+const Products = ({filteredItems}) => (
     <div className="max-w-6xl p-6 mx-auto">
-      {props.filteredItems.length !== 0 ? (
+      {filteredItems.length !== 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {props.filteredItems.map((item) => {
-            return <Item key={item.id} item={item} />;
+          {filteredItems.map((item) => {
+            return <ProductCard key={item.id} item={item} />;
           })}
         </div>
       ) : (
@@ -14,6 +13,5 @@ const Products = (props) => {
       )}
     </div>
   );
-};
 
 export default Products;

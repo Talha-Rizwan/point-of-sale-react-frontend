@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDropzone } from "react-dropzone";
 
 const AddProductForm = () => {
-  const [formData, setFormData] = useState({
+  const [productData, setProductData] = useState({
     title: "",
     price: "",
     description: "",
@@ -20,7 +20,7 @@ const AddProductForm = () => {
 
       img.onload = function () {
         if (img.width <= 200 && img.height <= 200) {
-          setFormData({ ...formData, image });
+          setProductData({ ...productData, image });
         } else {
           alert("Image dimensions must not be more than 200x200 pixels.");
         }
@@ -36,21 +36,21 @@ const AddProductForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setProductData({ ...productData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     axios
-      .post("https://fakestoreapi.com/products", formData)
+      .post("https://fakestoreapi.com/products", productData)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
 
         if (response.status === 200) {
-          alert("The product " + formData.title + " has been added!");
+          alert("The product " + productData.title + " has been added!");
         }
-        setFormData({
+        setProductData({
           title: "",
           price: "",
           description: "",
@@ -74,7 +74,7 @@ const AddProductForm = () => {
             type="text"
             id="title"
             name="title"
-            value={formData.title}
+            value={productData.title}
             onChange={handleChange}
             className="w-full p-2 "
             required
@@ -88,7 +88,7 @@ const AddProductForm = () => {
             type="number"
             id="price"
             name="price"
-            value={formData.price}
+            value={productData.price}
             onChange={handleChange}
             className="w-full p-2"
             required
@@ -101,7 +101,7 @@ const AddProductForm = () => {
           <textarea
             id="description"
             name="description"
-            value={formData.description}
+            value={productData.description}
             onChange={handleChange}
             className="w-full p-2"
             rows="4"
@@ -113,8 +113,8 @@ const AddProductForm = () => {
           </label>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
-            {formData.image ? (
-              <p>{formData.image.name}</p>
+            {productData.image ? (
+              <p>{productData.image.name}</p>
             ) : (
               <p className="border border-blue-500 border-dashed p-2">
                 Drag an image (max 200x200 pixels) here, or click to Browse

@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const DeleteModel = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const itemData = location.state?.itemData;
 

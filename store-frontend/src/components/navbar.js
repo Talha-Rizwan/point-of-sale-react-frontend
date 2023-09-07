@@ -1,5 +1,4 @@
-const Navbar = () => {
-    return (
+const Navbar = () => (
       <header className="p-4">
         <div className="flex h-16 mx-auto justify-around md:space-x-8 bg-slate-300">
           <ul className="flex">
@@ -25,7 +24,5 @@ const Navbar = () => {
         </div>
       </header>
     );
-  };
-  
+
   export default Navbar;
-  

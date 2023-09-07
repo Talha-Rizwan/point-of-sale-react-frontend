@@ -4,10 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 
 const UpdateProductForm = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const itemData = location.state?.itemData;
-  const [formData, setFormData] = useState({
+  const [productData, setProductData] = useState({
     title: itemData.title,
     price: itemData.price,
     description: itemData.description,
@@ -24,7 +24,7 @@ const UpdateProductForm = () => {
 
       img.onload = function () {
         if (img.width <= 200 && img.height <= 200) {
-          setFormData({ ...formData, image });
+          setProductData({ ...productData, image });
         } else {
           alert("Image dimensions must be 200x200 pixels or smaller.");
         }
@@ -41,23 +41,23 @@ const UpdateProductForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setProductData({ ...productData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     axios
-      .put("https://fakestoreapi.com/products/" + itemData.id, formData)
+      .put("https://fakestoreapi.com/products/" + itemData.id, productData)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
 
         if (response.status === 200) {
           alert(
-            "The product " + formData.title + " has been successfully updated!"
+            "The product " + productData.title + " has been successfully updated!"
           );
         }
-        setFormData({
+        setProductData({
           title: "",
           price: "",
           description: "",
@@ -84,7 +84,7 @@ const UpdateProductForm = () => {
             type="text"
             id="title"
             name="title"
-            value={formData.title}
+            value={productData.title}
             onChange={handleChange}
             className="w-full p-2 "
             required
@@ -98,7 +98,7 @@ const UpdateProductForm = () => {
             type="number"
             id="price"
             name="price"
-            value={formData.price}
+            value={productData.price}
             onChange={handleChange}
             className="w-full p-2"
             required
@@ -111,7 +111,7 @@ const UpdateProductForm = () => {
           <textarea
             id="description"
             name="description"
-            value={formData.description}
+            value={productData.description}
             onChange={handleChange}
             className="w-full p-2"
             rows="4"
@@ -123,7 +123,7 @@ const UpdateProductForm = () => {
           </label>
           <div {...getRootProps()}>
             <input {...getInputProps()} />
-            {formData.image ? (
+            {productData.image ? (
               <p className="border border-blue-500 border-dashed p-2">
                 File already uploaded, click to Browse or drag image here (max
                 200x200 pixels)
