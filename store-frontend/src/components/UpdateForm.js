@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
 
 function UpdateForm() {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   const location = useLocation();
   const itemData = location.state?.itemData;
   const [formData, setFormData] = useState({
@@ -13,49 +14,69 @@ function UpdateForm() {
     image: itemData.image,
   });
 
+  const onDrop = (acceptedFiles) => {
+    const image = acceptedFiles[0];
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const img = new Image();
+      img.src = reader.result;
+
+      img.onload = function () {
+        if (img.width <= 200 && img.height <= 200) {
+          setFormData({ ...formData, image });
+        } else {
+          alert("Image dimensions must be 200x200 pixels or smaller.");
+        }
+      };
+    };
+
+    reader.readAsDataURL(image);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: [".jpg", ".jpeg", ".png"],
+    onDrop,
+  });
+
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    
-    if (name === 'image') {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('title', formData.title);
-    formDataToSend.append('price', formData.price);
-    formDataToSend.append('description', formData.description);
-    formDataToSend.append('image', formData.image);
-    
-    axios.put('https://fakestoreapi.com/products/'+itemData.id, formDataToSend)
-    .then((response) => {
-      console.log('Data sent successfully:', response.data);
-      
-      if (response.status === 200){
-        alert("The product "+ formData.title + " has been successfully updated!")
-      }
-      setFormData({
-        title: '',
-        price: '',
-        description: '',
+    axios
+      .put("https://fakestoreapi.com/products/" + itemData.id, formData)
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
+
+        if (response.status === 200) {
+          alert(
+            "The product " + formData.title + " has been successfully updated!"
+          );
+        }
+        setFormData({
+          title: "",
+          price: "",
+          description: "",
+        });
+        navigate("/");
       })
-      navigate('/')
-    })
-    .catch((error) => {
-      console.error('Error sending data:', error);
-    });
+      .catch((error) => {
+        console.error("Error :", error);
+      });
   };
 
   return (
     <div className="max-w-md mx-auto mt-8 ">
-      <form onSubmit={handleSubmit} className="bg-slate-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-slate-200 shadow-md rounded p-8 mb-4"
+      >
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-bold mb-2">
+          <label htmlFor="name" className="block font-bold mb-2">
             Title:
           </label>
           <input
@@ -69,7 +90,7 @@ function UpdateForm() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-bold mb-2">
+          <label htmlFor="name" className="block font-bold mb-2">
             Price ($):
           </label>
           <input
@@ -83,7 +104,7 @@ function UpdateForm() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-bold mb-2">
+          <label htmlFor="description" className="block font-bold mb-2">
             Description:
           </label>
           <textarea
@@ -91,28 +112,34 @@ function UpdateForm() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="rounded w-full p-2 "
+            className="w-full p-2"
             rows="4"
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="image" className="block text-sm font-bold mb-2">
+          <label htmlFor="image" className="block font-bold mb-2">
             Image:
           </label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleChange}
-            accept=".jpg, .jpeg, .png" 
-          />
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            {formData.image ? (
+              <p className="border border-blue-500 border-dashed p-2">
+                File already uploaded, click to Browse or drag image here (max
+                200x200 pixels)
+              </p>
+            ) : (
+              <p className="border border-blue-500 border-dashed p-2">
+                Drag an image (max 200x200 pixels) here, or click to Browse
+              </p>
+            )}
+          </div>
         </div>
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
-          >
-            Submit
-          </button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

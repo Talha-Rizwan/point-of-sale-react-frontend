@@ -1,60 +1,72 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { useDropzone } from "react-dropzone";
 
 function AddForm() {
   const [formData, setFormData] = useState({
-    title: '',
-    price: '',
-    description: '',
+    title: "",
+    price: "",
+    description: "",
     image: null,
   });
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    
-    if (name === 'image') {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+  const onDrop = (acceptedFiles) => {
+    const image = acceptedFiles[0];
+    const reader = new FileReader();
 
+    reader.onload = function () {
+      const img = new Image();
+      img.src = reader.result;
+
+      img.onload = function () {
+        if (img.width <= 200 && img.height <= 200) {
+          setFormData({ ...formData, image });
+        } else {
+          alert("Image dimensions must not be more than 200x200 pixels.");
+        }
+      };
+    };
+    reader.readAsDataURL(image);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: [".jpg", ".jpeg", ".png"],
+    onDrop,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-      formDataToSend.append('title', formData.title);
-      formDataToSend.append('price', formData.price);
-      formDataToSend.append('description', formData.description);
-      formDataToSend.append('image', formData.image);
 
+    axios
+      .post("https://fakestoreapi.com/products", formData)
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
 
-
-    console.log('the formdata is : ', formData)
-    axios.post('https://fakestoreapi.com/products', formDataToSend)
-    .then((response) => {
-      console.log('Data sent successfully:', response.data);
-      
-      if (response.status === 200){
-        alert("The product "+ formData.title + " has been added!")
-      }
-      setFormData({
-        title: '',
-        price: '',
-        description: '',
-        image: null,
+        if (response.status === 200) {
+          alert("The product " + formData.title + " has been added!");
+        }
+        setFormData({
+          title: "",
+          price: "",
+          description: "",
+          image: null,
+        });
       })
-    })
-    .catch((error) => {
-      console.error('Error sending data:', error);
-    });
+      .catch((error) => {
+        console.error("Error :", error);
+      });
   };
 
   return (
     <div className="max-w-md mx-auto mt-8 ">
-      <form onSubmit={handleSubmit} className="bg-slate-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form onSubmit={handleSubmit} className="bg-slate-200 p-8 mb-4">
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-bold mb-2">
+          <label htmlFor="name" className="block font-bold mb-2">
             Title:
           </label>
           <input
@@ -68,7 +80,7 @@ function AddForm() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-bold mb-2">
+          <label htmlFor="name" className="block font-bold mb-2">
             Price ($):
           </label>
           <input
@@ -82,7 +94,7 @@ function AddForm() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-bold mb-2">
+          <label htmlFor="description" className="block font-bold mb-2">
             Description:
           </label>
           <textarea
@@ -90,21 +102,24 @@ function AddForm() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="rounded w-full p-2 "
+            className="w-full p-2"
             rows="4"
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="image" className="block text-sm font-bold mb-2">
+          <label htmlFor="image" className="block font-bold mb-2">
             Image:
           </label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleChange}
-            accept=".jpg, .jpeg, .png" 
-          />
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            {formData.image ? (
+              <p>{formData.image.name}</p>
+            ) : (
+              <p className="border border-blue-500 border-dashed p-2">
+                Drag an image (max 200x200 pixels) here, or click to Browse
+              </p>
+            )}
+          </div>
         </div>
         <button
           type="submit"
