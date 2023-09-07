@@ -3,6 +3,7 @@ import axios from "axios";
 
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
+// import Model from "../components/Model";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -35,6 +36,7 @@ const Home = () => {
       <h1 className="text-center m-5 underline text-xl md:text-3xl font-bold">
         Products
       </h1>
+      {/* <Model /> */}
       <SearchBar searchFtn={handleSearchChange} />
       <Products filteredItems={filteredItems} />
     </div>
