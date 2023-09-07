@@ -65,6 +65,7 @@ function UpdateForm() {
         navigate("/");
       })
       .catch((error) => {
+        alert('Error Updating data!')
         console.error("Error :", error);
       });
   };

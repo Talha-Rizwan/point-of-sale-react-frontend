@@ -22,7 +22,8 @@ const DeleteModel = () => {
       })
 
       .catch((error) => {
-        console.error("Error deleting data: ", error);
+        alert('Error deleting data!')
+        console.error("Error: ", error);
       });
   };
 

@@ -14,6 +14,7 @@ const Home = () => {
         setProducts(response.data);
       })
       .catch((error) => {
+        alert('Error getting data!')
         console.error("Error data: ", error);
       });
   }, []);

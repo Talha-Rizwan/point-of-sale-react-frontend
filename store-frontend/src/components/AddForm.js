@@ -58,6 +58,7 @@ function AddForm() {
         });
       })
       .catch((error) => {
+        alert('Error submitting data!')
         console.error("Error :", error);
       });
   };
