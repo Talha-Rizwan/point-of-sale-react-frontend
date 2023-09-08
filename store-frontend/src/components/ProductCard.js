@@ -1,5 +1,5 @@
-import UpdateProductModel from "./modals/UpdateProductModel";
-import DeleteProductModel from "./modals/DeleteProductModel";
+import UpdateModal from "./modals/UpdateProductModal";
+import DeleteModal from "./modals/DeleteProductModal";
 
 const ProductCard = ({item, setProducts}) => {
 
@@ -17,8 +17,8 @@ const ProductCard = ({item, setProducts}) => {
         <span className="text-xs ">Price : ${item?.price}</span>
       </div>
       <div className="flex justify-end m-2">
-        <UpdateProductModel itemData={item} setProducts={setProducts} className="mx-2 bg-slate-400 hover:bg-blue-700 text-white font-bold p-3 " />
-        <DeleteProductModel itemData={item} setProducts={setProducts} className="mx-2 bg-red-500 hover:bg-red-700 text-white font-bold p-3 "/>
+        <UpdateModal itemData={item} setProducts={setProducts}  />
+        <DeleteModal itemData={item} setProducts={setProducts} />
       </div>
     </div>
   );

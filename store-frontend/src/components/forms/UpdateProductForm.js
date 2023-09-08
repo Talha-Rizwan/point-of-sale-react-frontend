@@ -148,17 +148,12 @@ const UpdateProductForm = ({itemData, setProducts}) => {
             )}
           </div>
         </div>
-        <div className="flex justify-end space-x-4">
-        <form method="dialog">
-              <button className="btn font-bold  rounded">Close</button>
-        </form>
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
         >
           Submit
         </button>
-        </div>
       </form>
     </div>
   );
