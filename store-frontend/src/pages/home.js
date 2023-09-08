@@ -33,9 +33,6 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="text-center m-5 underline text-xl md:text-3xl font-bold">
-        Products
-      </h1>
       <SearchBar searchFtn={handleSearchChange} />
       <AddModal  setProducts={setProducts}/>
       <Products filteredItems={filteredItems} setProducts={setProducts} />
