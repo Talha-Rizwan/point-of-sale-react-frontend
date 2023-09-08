@@ -3,11 +3,18 @@ import axios from "axios";
 
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
-// import Model from "../components/Model";
+import Model from "../components/Model";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+
+  const filteredItems = products?.filter(
+    (item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     axios
@@ -25,19 +32,19 @@ const Home = () => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredItems = products?.filter(
-    (item) =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    
+  }, [filteredItems]);
+
+  
 
   return (
     <div>
       <h1 className="text-center m-5 underline text-xl md:text-3xl font-bold">
         Products
       </h1>
-      {/* <Model /> */}
       <SearchBar searchFtn={handleSearchChange} />
+      <Model setProducts={setProducts} />
       <Products filteredItems={filteredItems} />
     </div>
   );

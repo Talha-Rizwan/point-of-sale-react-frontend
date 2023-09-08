@@ -8,18 +8,10 @@ const Navbar = () => (
                 href="/"
                 className="flex items-center px-4 -mb-1 hover:border-b-2"
               >
-                Home
+                Refresh Page
               </a>
             </li>
-            <li className="flex hover:text-white">
-              <a
-                rel="noopener noreferrer"
-                href="/add"
-                className="flex items-center px-4 -mb-1 hover:border-b-2"
-              >
-                Add Product
-              </a>
-            </li>
+            
           </ul>
         </div>
       </header>

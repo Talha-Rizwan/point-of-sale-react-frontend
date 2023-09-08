@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 
-const AddProductForm = () => {
+const AddProductForm = ({setProducts}) => {
   const [productData, setProductData] = useState({
     title: "",
     price: "",
@@ -42,10 +42,14 @@ const AddProductForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    
+
+
     axios
       .post("https://fakestoreapi.com/products", productData)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
+        setProducts((prev)=> [...prev,productData])
 
         if (response.status === 200) {
           alert("The product " + productData.title + " has been added!");
@@ -125,6 +129,14 @@ const AddProductForm = () => {
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
+        //   onClick={()=>{
+        //     setProducts((prev)=> [...prev,{
+        //         title: "talha",
+        //         price: "123",
+        //         description: "test product",
+        //         image: null,
+        //       }])
+        // }}
         >
           Submit
         </button>
