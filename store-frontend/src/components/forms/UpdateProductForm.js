@@ -67,7 +67,7 @@ const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
         console.log("Data sent successfully:", response.data);
 
         if (response.status === 200) {
-          alert(
+          console.log(
             "The product " + productData.title + " has been successfully updated!"
           );
         }

@@ -49,7 +49,7 @@ const AddProductForm = ({setProducts, closeModal}) => {
         setProducts((prev)=> [...prev,productData])
 
         if (response.status === 200) {
-          alert("The product " + productData.title + " has been added!");
+          console.log("The product " + productData.title + " has been added!");
         }
         setProductData({
           title: "",
