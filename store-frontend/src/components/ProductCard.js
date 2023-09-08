@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import UpdateProductModel from "./UpdateProductModel";
+import DeleteProductModel from "./DeleteProductModel";
 
 const ProductCard = ({item, setProducts}) => {
-  const navigate = useNavigate();
 
   return (
     <div className="container max-w-sm mx-auto hover:bg-slate-100 ">
@@ -18,16 +17,8 @@ const ProductCard = ({item, setProducts}) => {
         <span className="text-xs ">Price : ${item?.price}</span>
       </div>
       <div className="flex justify-end m-2">
-        
         <UpdateProductModel itemData={item} setProducts={setProducts} className="mx-2 bg-slate-400 hover:bg-blue-700 text-white font-bold p-3 " />
-        <button
-          className="mx-2 bg-red-400 hover:bg-red-700 text-white font-bold p-3"
-          onClick={() => {
-            navigate("/delete", { state: { itemData: item } });
-          }}
-        >
-          Delete
-        </button>
+        <DeleteProductModel itemData={item} setProducts={setProducts} className="mx-2 bg-red-500 hover:bg-red-700 text-white font-bold p-3 "/>
       </div>
     </div>
   );

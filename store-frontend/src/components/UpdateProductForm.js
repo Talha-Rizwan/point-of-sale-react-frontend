@@ -55,9 +55,7 @@ const UpdateProductForm = ({itemData, setProducts}) => {
           description: productData.description,
           image: productData.image,
         };
-    
-        console.log(updatedProducts);
-    
+            
         return updatedProducts;
       }
       return prev;
