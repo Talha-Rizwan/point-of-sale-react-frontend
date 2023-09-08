@@ -3,12 +3,11 @@ import axios from "axios";
 
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
-import Model from "../components/Model";
+import AddProductModel from "../components/AddProductModel";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
 
   const filteredItems = products?.filter(
     (item) =>
@@ -32,20 +31,14 @@ const Home = () => {
     setSearchQuery(event.target.value);
   };
 
-  useEffect(() => {
-    
-  }, [filteredItems]);
-
-  
-
   return (
     <div>
       <h1 className="text-center m-5 underline text-xl md:text-3xl font-bold">
         Products
       </h1>
       <SearchBar searchFtn={handleSearchChange} />
-      <Model setProducts={setProducts} />
-      <Products filteredItems={filteredItems} />
+      <AddProductModel setProducts={setProducts} />
+      <Products filteredItems={filteredItems} setProducts={setProducts} />
     </div>
   );
 };

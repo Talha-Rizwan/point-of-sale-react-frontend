@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard";
 
-const Products = ({filteredItems}) => {
+const Products = ({filteredItems, setProducts}) => {
   console.log('the filtered items are : ', filteredItems)
 
   return (
@@ -8,7 +8,7 @@ const Products = ({filteredItems}) => {
       {filteredItems.length !== 0 ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredItems.map((item) => {
-            return <ProductCard key={item.id} item={item} />;
+            return <ProductCard key={item.id} item={item} setProducts={setProducts} />;
           })}
         </div>
       ) : (

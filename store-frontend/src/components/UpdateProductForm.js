@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 
-const UpdateProductForm = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const itemData = location.state?.itemData;
+const UpdateProductForm = ({itemData, setProducts}) => {
   const [productData, setProductData] = useState({
     title: itemData.title,
     price: itemData.price,
@@ -47,6 +43,26 @@ const UpdateProductForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setProducts((prev) => {
+      const indexToUpdate = prev.findIndex((product) => product.id === itemData.id);
+    
+      if (indexToUpdate !== -1) {
+        const updatedProducts = [...prev];
+        updatedProducts[indexToUpdate] = {
+          ...updatedProducts[indexToUpdate],
+          title: productData.title,
+          price: productData.price,
+          description: productData.description,
+          image: productData.image,
+        };
+    
+        console.log(updatedProducts);
+    
+        return updatedProducts;
+      }
+      return prev;
+    });
+
     axios
       .put("https://fakestoreapi.com/products/" + itemData.id, productData)
       .then((response) => {
@@ -62,7 +78,6 @@ const UpdateProductForm = () => {
           price: "",
           description: "",
         });
-        navigate("/");
       })
       .catch((error) => {
         alert('Error Updating data!')
@@ -135,12 +150,17 @@ const UpdateProductForm = () => {
             )}
           </div>
         </div>
+        <div className="flex justify-end space-x-4">
+        <form method="dialog">
+              <button className="btn font-bold  rounded">Close</button>
+        </form>
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
         >
           Submit
         </button>
+        </div>
       </form>
     </div>
   );
