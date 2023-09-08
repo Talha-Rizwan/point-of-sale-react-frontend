@@ -3,7 +3,7 @@ import axios from "axios";
 
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
-import AddModal from "../components/modals/AddProductModal";
+import AddProductModal from "../components/modals/AddProductModal";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <div>
       <SearchBar searchFtn={handleSearchChange} />
-      <AddModal  setProducts={setProducts} />
+      <AddProductModal  setProducts={setProducts} />
       <Products filteredItems={filteredItems} setProducts={setProducts} />
     </div>
   );

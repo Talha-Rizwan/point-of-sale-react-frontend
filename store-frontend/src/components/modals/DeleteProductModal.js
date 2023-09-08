@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function DeleteModal( {itemData, setProducts} ) {
+const DeleteProductModal = ( {itemData, setProducts} ) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,3 +54,5 @@ export default function DeleteModal( {itemData, setProducts} ) {
     </div>
   );
 }
+
+export default DeleteProductModal;
