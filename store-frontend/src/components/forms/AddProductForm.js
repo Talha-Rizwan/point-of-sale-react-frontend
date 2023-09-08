@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 
-const AddProductForm = ({setProducts}) => {
+const AddProductForm = ({setProducts, closeModal}) => {
   const [productData, setProductData] = useState({
     title: "",
     price: "",
@@ -62,6 +62,7 @@ const AddProductForm = ({setProducts}) => {
         alert('Error submitting data!')
         console.error("Error :", error);
       });
+      closeModal()
   };
 
   return (

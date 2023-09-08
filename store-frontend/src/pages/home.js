@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <div>
       <SearchBar searchFtn={handleSearchChange} />
-      <AddModal  setProducts={setProducts}/>
+      <AddModal  setProducts={setProducts} />
       <Products filteredItems={filteredItems} setProducts={setProducts} />
     </div>
   );

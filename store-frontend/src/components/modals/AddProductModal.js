@@ -36,7 +36,7 @@ export default function AddModal( {setProducts} ) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Add Product
           </Typography>
-          <AddProductForm setProducts={setProducts} />
+          <AddProductForm setProducts={setProducts} closeModal={handleClose}/>
         </Box>
       </Modal>
     </div>

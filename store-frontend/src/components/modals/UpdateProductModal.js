@@ -36,7 +36,7 @@ export default function UpdateModal( {itemData, setProducts} ) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Update Product
           </Typography>
-          <UpdateProductForm itemData={itemData} setProducts={setProducts} /> 
+          <UpdateProductForm itemData={itemData} setProducts={setProducts} closeModal={handleClose} /> 
         </Box>
       </Modal>
     </div>

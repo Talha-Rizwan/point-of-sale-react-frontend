@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 
-const UpdateProductForm = ({itemData, setProducts}) => {
+const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
   const [productData, setProductData] = useState({
     title: itemData.title,
     price: itemData.price,
@@ -81,6 +81,7 @@ const UpdateProductForm = ({itemData, setProducts}) => {
         alert('Error Updating data!')
         console.error("Error :", error);
       });
+      closeModal()
   };
 
   return (
