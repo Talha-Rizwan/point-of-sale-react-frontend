@@ -1,4 +1,4 @@
-import SearchIcon from "./icons/searchIcon";
+import SearchIcon from "../icons/searchIcon";
 
 const SearchBar = ({searchFtn}) => (
     <div className="container max-w-md flex h-16 mx-auto justify-around bg-slate-300">

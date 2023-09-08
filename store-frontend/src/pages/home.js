@@ -3,7 +3,7 @@ import axios from "axios";
 
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
-import AddProductModel from "../components/AddProductModel";
+import AddProductModel from "../components/modals/AddProductModel";
 
 const Home = () => {
   const [products, setProducts] = useState([]);

@@ -1,4 +1,4 @@
-import UpdateProductForm from "./UpdateProductForm"
+import UpdateProductForm from "../forms/UpdateProductForm"
 
 const UpdateProductModel = ({itemData, setProducts}) => {
     const modalId = `update_model_${itemData.id}`;

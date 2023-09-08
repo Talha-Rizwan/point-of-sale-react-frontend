@@ -1,4 +1,4 @@
-import AddProductForm from './AddProductForm'
+import AddProductForm from '../forms/AddProductForm'
 
 const AddProductModel = ({setProducts}) => (
 

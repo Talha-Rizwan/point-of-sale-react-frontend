@@ -1,5 +1,5 @@
-import UpdateProductModel from "./UpdateProductModel";
-import DeleteProductModel from "./DeleteProductModel";
+import UpdateProductModel from "./modals/UpdateProductModel";
+import DeleteProductModel from "./modals/DeleteProductModel";
 
 const ProductCard = ({item, setProducts}) => {
 
