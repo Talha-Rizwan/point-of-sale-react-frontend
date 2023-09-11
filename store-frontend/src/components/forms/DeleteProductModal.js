@@ -60,7 +60,7 @@ const DeleteProductModal = ({ productDetails, setProducts }) => {
 DeleteProductModal.propTypes = {
   productDetails: PropTypes.shape({
     id: PropTypes.number.isRequired,
-  }).isRequired,
+  }),
   setProducts: PropTypes.func.isRequired,
 };
 

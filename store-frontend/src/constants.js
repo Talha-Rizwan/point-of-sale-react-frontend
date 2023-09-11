@@ -1,4 +1,4 @@
-ADD = "Add";
-UPDATE = "Update";
+const ADD = "Add";
+const UPDATE = "Update";
 
 export { ADD, UPDATE };

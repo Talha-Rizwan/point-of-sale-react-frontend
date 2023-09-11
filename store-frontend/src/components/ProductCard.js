@@ -5,10 +5,12 @@ import ProductModal from "./forms/ProductModal";
 import DeleteProductModal from "./forms/DeleteProductModal";
 import { UPDATE } from "../constants";
 
-const ProductCard = ({ product, setProducts }) => (
+const ProductCard = ({ product, setProducts }) => {
+  console.log('the items are : ', product)
+  return (
   <div className="container max-w-sm mx-auto hover:bg-slate-100 ">
     <img
-      alt=""
+      alt="not available"
       className="object-contain mx-auto m-1 w-auto h-44 "
       src={product?.image}
     />
@@ -28,7 +30,7 @@ const ProductCard = ({ product, setProducts }) => (
     </div>
   </div>
 );
-
+  }
 ProductCard.propTypes = {
   product: PropTypes.shape({
     image: PropTypes.string,

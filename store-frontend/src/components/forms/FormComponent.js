@@ -61,7 +61,7 @@ const FormComponent = ({
           onChange={handleChange}
           className="w-full p-2"
           rows="4"
-        ></textarea>
+        />
       </div>
       <div className="mb-4">
         <label htmlFor="image" className="block font-bold mb-2">

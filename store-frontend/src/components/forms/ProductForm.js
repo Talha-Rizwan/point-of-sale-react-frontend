@@ -86,6 +86,7 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
           title: "",
           price: "",
           description: "",
+          image: null,
         });
       })
       .catch((error) => {
