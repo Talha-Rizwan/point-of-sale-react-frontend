@@ -90,6 +90,7 @@ const FormComponent = ({
     </form>
   );
 };
+
 FormComponent.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
