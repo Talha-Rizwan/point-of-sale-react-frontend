@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import ProductModal from "./forms/ProductModal";
 import DeleteProductModal from "./forms/DeleteProductModal";
+import { UPDATE } from "../constants";
 
 const ProductCard = ({ product, setProducts }) => (
   <div className="container max-w-sm mx-auto hover:bg-slate-100 ">
@@ -19,7 +20,7 @@ const ProductCard = ({ product, setProducts }) => (
     </div>
     <div className="flex justify-end m-2">
       <ProductModal
-        name={"Update"}
+        name={UPDATE}
         productDetails={product}
         setProducts={setProducts}
       />

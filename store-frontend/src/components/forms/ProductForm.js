@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { v4 as uuidv4 } from "uuid";
 
 import FormComponent from "./FormComponent";
+import { ADD } from "../../constants";
 
 const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const [productData, setProductData] = useState({
@@ -124,7 +125,7 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   };
 
   function submissionFunction() {
-    if (name === "Add") {
+    if (name === ADD) {
       return handleNewAddition;
     } else return handleUpdate;
   }
