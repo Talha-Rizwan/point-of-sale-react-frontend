@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import UpdateProductModal from "./modals/UpdateProductModal";
-import DeleteProductModal from "./modals/DeleteProductModal";
+import ProductModal from "./forms/ProductModal";
+import DeleteProductModal from "./forms/DeleteProductModal";
 
 const ProductCard = ({ product, setProducts }) => (
   <div className="container max-w-sm mx-auto hover:bg-slate-100 ">
@@ -18,7 +18,11 @@ const ProductCard = ({ product, setProducts }) => (
       <span className="text-xs ">Price : ${product?.price}</span>
     </div>
     <div className="flex justify-end m-2">
-      <UpdateProductModal productDetails={product} setProducts={setProducts} />
+      <ProductModal
+        name={"Update"}
+        productDetails={product}
+        setProducts={setProducts}
+      />
       <DeleteProductModal productDetails={product} setProducts={setProducts} />
     </div>
   </div>

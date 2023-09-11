@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
+import { v4 as uuidv4 } from "uuid";
 
 import FormComponent from "./FormComponent";
 
-const UpdateProductForm = ({ productDetails, setProducts, closeModal }) => {
+const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const [productData, setProductData] = useState({
-    title: productDetails.title,
-    price: productDetails.price,
-    description: productDetails.description,
-    image: productDetails.image,
+    title: productDetails?.title || "",
+    price: productDetails?.price || 0,
+    description: productDetails?.description || "",
+    image: productDetails?.image || null,
   });
 
   const onDrop = (acceptedFiles) => {
@@ -42,7 +43,7 @@ const UpdateProductForm = ({ productDetails, setProducts, closeModal }) => {
     setProductData({ ...productData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
 
     setProducts((prev) => {
@@ -66,7 +67,10 @@ const UpdateProductForm = ({ productDetails, setProducts, closeModal }) => {
     });
 
     axios
-      .put("https://fakestoreapi.com/products/" + productDetails.id, productData)
+      .put(
+        "https://fakestoreapi.com/products/" + productDetails.id,
+        productData
+      )
       .then((response) => {
         console.log("Data sent successfully:", response.data);
 
@@ -89,11 +93,47 @@ const UpdateProductForm = ({ productDetails, setProducts, closeModal }) => {
     closeModal();
   };
 
+  const handleNewAddition = (e) => {
+    e.preventDefault();
+
+    const productId = uuidv4();
+
+    const newProduct = { ...productData, id: productId };
+
+    axios
+      .post("https://fakestoreapi.com/products", newProduct)
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
+        setProducts((prev) => [...prev, newProduct]);
+
+        if (response.status === 200) {
+          console.log("The product " + newProduct.title + " has been added!");
+        }
+        setProductData({
+          title: "",
+          price: "",
+          description: "",
+          image: null,
+        });
+      })
+      .catch((error) => {
+        alert("Error submitting data!");
+        console.error("Error :", error);
+      });
+    closeModal();
+  };
+
+  function submissionFunction() {
+    if (name === "Add") {
+      return handleNewAddition;
+    } else return handleUpdate;
+  }
+
   return (
     <div className="max-w-md mx-auto mt-8 ">
       <FormComponent
         handleChange={handleChange}
-        handleSubmit={handleSubmit}
+        handleSubmit={submissionFunction()}
         productData={productData}
         getRootProps={getRootProps}
         getInputProps={getInputProps}
@@ -102,16 +142,17 @@ const UpdateProductForm = ({ productDetails, setProducts, closeModal }) => {
   );
 };
 
-UpdateProductForm.propTypes = {
+ProductForm.propTypes = {
   productDetails: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string,
     image: PropTypes.object,
-  }).isRequired,
+  }),
+  name: PropTypes.string.isRequired,
   setProducts: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 
-export default UpdateProductForm;
+export default ProductForm;

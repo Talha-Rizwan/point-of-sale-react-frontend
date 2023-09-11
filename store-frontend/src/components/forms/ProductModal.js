@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 
-import AddProductForm from "../forms/AddProductForm";
+import ProductForm from "./ProductForm";
 
 const style = {
   position: "absolute",
@@ -19,14 +19,14 @@ const style = {
   p: 4,
 };
 
-const AddProductModal = ({ setProducts }) => {
+const ProductModal = ({ name, productDetails, setProducts }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div className="flex justify-center m-2">
-      <Button onClick={handleOpen}>Add Product</Button>
+      <Button onClick={handleOpen}>{name}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -35,17 +35,24 @@ const AddProductModal = ({ setProducts }) => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Add Product
+            {name} Product
           </Typography>
-          <AddProductForm setProducts={setProducts} closeModal={handleClose} />
+          <ProductForm
+            name={name}
+            productDetails={productDetails}
+            setProducts={setProducts}
+            closeModal={handleClose}
+          />
         </Box>
       </Modal>
     </div>
   );
 };
 
-AddProductModal.propTypes = {
+ProductModal.propTypes = {
   setProducts: PropTypes.func.isRequired,
+  productDetails: PropTypes.object,
+  name: PropTypes.string.isRequired,
 };
 
-export default AddProductModal;
+export default ProductModal;
