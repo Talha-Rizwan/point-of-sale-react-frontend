@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import PropTypes from 'prop-types'
 
 import UpdateProductForm from '../forms/UpdateProductForm';
 
@@ -41,6 +42,11 @@ const  UpdateProductModal = ( {itemData, setProducts} ) => {
       </Modal>
     </div>
   );
+}
+
+UpdateProductModal.propTypes = {
+  setProducts: PropTypes.func.isRequired,
+  itemData: PropTypes.object.isRequired, 
 }
 
 export default UpdateProductModal;

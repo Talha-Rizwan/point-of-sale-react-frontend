@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import PropTypes from "prop-types"
 
 const style = {
   position: 'absolute',
@@ -54,5 +54,12 @@ const DeleteProductModal = ( {itemData, setProducts} ) => {
     </div>
   );
 }
+
+DeleteProductModal.propTypes = {
+  itemData: PropTypes.shape({
+    id: PropTypes.number.isRequired
+  }).isRequired,
+  setProducts: PropTypes.func.isRequired,
+};
 
 export default DeleteProductModal;

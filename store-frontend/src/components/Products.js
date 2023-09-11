@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import ProductCard from "./ProductCard";
 
 const Products = ({filteredItems, setProducts}) => (
@@ -13,5 +16,16 @@ const Products = ({filteredItems, setProducts}) => (
     )}
   </div>
 )
+
+Products.propTypes = {
+  filteredItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  setProducts: PropTypes.func.isRequired,
+};
 
 export default Products;

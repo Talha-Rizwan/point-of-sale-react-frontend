@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import { v4 as uuidv4 } from 'uuid';
+import PropTypes from "prop-types";
 
 import FormComponent from "./FormComponent";
 
@@ -84,5 +85,11 @@ const AddProductForm = ({setProducts, closeModal}) => {
     </div>
   );
 }
+
+AddProductForm.propTypes = {
+  
+  setProducts: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
 
 export default AddProductForm;

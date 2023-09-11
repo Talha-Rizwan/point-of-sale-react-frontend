@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types"
+
 const FormComponent = ({handleChange, handleSubmit, productData, getInputProps, getRootProps}) =>(
     <form
     onSubmit={handleSubmit}
@@ -71,4 +74,17 @@ const FormComponent = ({handleChange, handleSubmit, productData, getInputProps, 
     </form>
 )
 
+FormComponent.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    productData: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      description: PropTypes.string,
+      image: PropTypes.object,
+    }).isRequired,
+    getInputProps: PropTypes.func.isRequired,
+    getRootProps: PropTypes.func.isRequired,
+  };
+  
 export default FormComponent;

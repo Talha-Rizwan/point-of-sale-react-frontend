@@ -1,3 +1,5 @@
+import React from "react";
+import PropTypes from "prop-types";
 import UpdateProductModal from "./modals/UpdateProductModal";
 import DeleteProductModal from "./modals/DeleteProductModal";
 
@@ -23,5 +25,15 @@ const ProductCard = ({item, setProducts}) => {
     </div>
   );
 };
+
+ProductCard.propTypes = {
+  item: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+  setProducts: PropTypes.func.isRequired,
+};
+
 
 export default ProductCard;

@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import SearchIcon from "../icons/searchIcon";
 
 const SearchBar = ({searchFtn}) => (
@@ -19,4 +22,8 @@ const SearchBar = ({searchFtn}) => (
     </div>
   );
 
+  SearchBar.propTypes = {
+    searchFtn: PropTypes.func.isRequired,
+  };
+  
 export default SearchBar;

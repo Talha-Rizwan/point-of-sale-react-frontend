@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import PropTypes from "prop-types";
 
 import AddProductForm from '../forms/AddProductForm';
 
@@ -42,5 +43,9 @@ const AddProductModal = ( {setProducts} ) => {
     </div>
   );
 }
+
+AddProductModal.propTypes = {
+  setProducts: PropTypes.func.isRequired,
+};
 
 export default AddProductModal;

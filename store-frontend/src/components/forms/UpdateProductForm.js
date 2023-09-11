@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types"
 import { useDropzone } from "react-dropzone";
 
 import FormComponent from "./FormComponent";
@@ -96,5 +97,18 @@ const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
     </div>
   );
 }
+
+UpdateProductForm.propTypes = {
+  itemData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.object,
+  }).isRequired,
+  setProducts: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
+
 
 export default UpdateProductForm;
