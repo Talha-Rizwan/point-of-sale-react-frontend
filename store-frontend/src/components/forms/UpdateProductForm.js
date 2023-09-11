@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
 
 import FormComponent from "./FormComponent";
 
-const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
+const UpdateProductForm = ({ itemData, setProducts, closeModal }) => {
   const [productData, setProductData] = useState({
     title: itemData.title,
     price: itemData.price,
@@ -46,8 +46,10 @@ const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
     e.preventDefault();
 
     setProducts((prev) => {
-      const indexToUpdate = prev.findIndex((product) => product.id === itemData.id);
-    
+      const indexToUpdate = prev.findIndex(
+        (product) => product.id === itemData.id
+      );
+
       if (indexToUpdate !== -1) {
         const updatedProducts = [...prev];
         updatedProducts[indexToUpdate] = {
@@ -57,7 +59,7 @@ const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
           description: productData.description,
           image: productData.image,
         };
-            
+
         return updatedProducts;
       }
       return prev;
@@ -70,7 +72,9 @@ const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
 
         if (response.status === 200) {
           console.log(
-            "The product " + productData.title + " has been successfully updated!"
+            "The product " +
+              productData.title +
+              " has been successfully updated!"
           );
         }
         setProductData({
@@ -82,33 +86,32 @@ const UpdateProductForm = ({itemData, setProducts, closeModal}) => {
       .catch((error) => {
         console.error("Error :", error);
       });
-      closeModal()
+    closeModal();
   };
 
   return (
     <div className="max-w-md mx-auto mt-8 ">
-      < FormComponent 
-        handleChange={handleChange} 
-        handleSubmit={handleSubmit} 
-        productData={productData} 
-        getRootProps={getRootProps} 
+      <FormComponent
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        productData={productData}
+        getRootProps={getRootProps}
         getInputProps={getInputProps}
-      />    
+      />
     </div>
   );
-}
+};
 
 UpdateProductForm.propTypes = {
   itemData: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     image: PropTypes.object,
   }).isRequired,
   setProducts: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
-
 
 export default UpdateProductForm;

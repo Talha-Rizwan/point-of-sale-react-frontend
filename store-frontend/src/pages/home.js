@@ -11,8 +11,8 @@ const Home = () => {
 
   const filteredItems = products?.filter(
     (item) =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.category.toLowerCase().includes(searchQuery.toLowerCase())
+      item?.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item?.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Home = () => {
         setProducts(response.data);
       })
       .catch((error) => {
-        alert('Error getting data!')
+        alert("Error getting data!");
         console.error("Error data: ", error);
       });
   }, []);
@@ -33,8 +33,8 @@ const Home = () => {
 
   return (
     <div>
-      <SearchBar searchFtn={handleSearchChange} />
-      <AddProductModal  setProducts={setProducts} />
+      <SearchBar setSearchInput={handleSearchChange} />
+      <AddProductModal setProducts={setProducts} />
       <Products filteredItems={filteredItems} setProducts={setProducts} />
     </div>
   );

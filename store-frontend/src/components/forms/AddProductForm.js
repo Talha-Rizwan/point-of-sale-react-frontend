@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 
 import FormComponent from "./FormComponent";
 
-const AddProductForm = ({setProducts, closeModal}) => {
+const AddProductForm = ({ setProducts, closeModal }) => {
   const [productData, setProductData] = useState({
     title: "",
     price: "",
@@ -54,7 +54,7 @@ const AddProductForm = ({setProducts, closeModal}) => {
       .post("https://fakestoreapi.com/products", newProduct)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
-        setProducts((prev)=> [...prev,newProduct])
+        setProducts((prev) => [...prev, newProduct]);
 
         if (response.status === 200) {
           console.log("The product " + newProduct.title + " has been added!");
@@ -67,27 +67,26 @@ const AddProductForm = ({setProducts, closeModal}) => {
         });
       })
       .catch((error) => {
-        alert('Error submitting data!')
+        alert("Error submitting data!");
         console.error("Error :", error);
       });
-      closeModal()
+    closeModal();
   };
 
   return (
     <div className="max-w-md mx-auto mt-8 ">
-      < FormComponent 
-        handleChange={handleChange} 
-        handleSubmit={handleSubmit} 
-        productData={productData} 
-        getRootProps={getRootProps} 
+      <FormComponent
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        productData={productData}
+        getRootProps={getRootProps}
         getInputProps={getInputProps}
       />
     </div>
   );
-}
+};
 
 AddProductForm.propTypes = {
-  
   setProducts: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
