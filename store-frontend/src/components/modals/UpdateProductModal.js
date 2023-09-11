@@ -19,7 +19,7 @@ const style = {
   p: 4,
 };
 
-const UpdateProductModal = ({ itemData, setProducts }) => {
+const UpdateProductModal = ({ productDetails, setProducts }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -38,7 +38,7 @@ const UpdateProductModal = ({ itemData, setProducts }) => {
             Update Product
           </Typography>
           <UpdateProductForm
-            itemData={itemData}
+            productDetails={productDetails}
             setProducts={setProducts}
             closeModal={handleClose}
           />
@@ -50,7 +50,7 @@ const UpdateProductModal = ({ itemData, setProducts }) => {
 
 UpdateProductModal.propTypes = {
   setProducts: PropTypes.func.isRequired,
-  itemData: PropTypes.object,
+  productDetails: PropTypes.object,
 };
 
 export default UpdateProductModal;

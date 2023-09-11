@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-const DeleteProductModal = ({ itemData, setProducts }) => {
+const DeleteProductModal = ({ productDetails, setProducts }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -25,7 +25,7 @@ const DeleteProductModal = ({ itemData, setProducts }) => {
   function handleDelete() {
     setProducts((prev) => {
       const updatedProducts = prev.filter(
-        (product) => product.id !== itemData.id
+        (product) => product.id !== productDetails.id
       );
       return updatedProducts;
     });
@@ -58,7 +58,7 @@ const DeleteProductModal = ({ itemData, setProducts }) => {
 };
 
 DeleteProductModal.propTypes = {
-  itemData: PropTypes.shape({
+  productDetails: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,
   setProducts: PropTypes.func.isRequired,

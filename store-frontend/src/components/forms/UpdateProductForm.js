@@ -5,12 +5,12 @@ import { useDropzone } from "react-dropzone";
 
 import FormComponent from "./FormComponent";
 
-const UpdateProductForm = ({ itemData, setProducts, closeModal }) => {
+const UpdateProductForm = ({ productDetails, setProducts, closeModal }) => {
   const [productData, setProductData] = useState({
-    title: itemData.title,
-    price: itemData.price,
-    description: itemData.description,
-    image: itemData.image,
+    title: productDetails.title,
+    price: productDetails.price,
+    description: productDetails.description,
+    image: productDetails.image,
   });
 
   const onDrop = (acceptedFiles) => {
@@ -47,7 +47,7 @@ const UpdateProductForm = ({ itemData, setProducts, closeModal }) => {
 
     setProducts((prev) => {
       const indexToUpdate = prev.findIndex(
-        (product) => product.id === itemData.id
+        (product) => product.id === productDetails.id
       );
 
       if (indexToUpdate !== -1) {
@@ -66,7 +66,7 @@ const UpdateProductForm = ({ itemData, setProducts, closeModal }) => {
     });
 
     axios
-      .put("https://fakestoreapi.com/products/" + itemData.id, productData)
+      .put("https://fakestoreapi.com/products/" + productDetails.id, productData)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
 
@@ -103,7 +103,7 @@ const UpdateProductForm = ({ itemData, setProducts, closeModal }) => {
 };
 
 UpdateProductForm.propTypes = {
-  itemData: PropTypes.shape({
+  productDetails: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
