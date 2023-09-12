@@ -20,14 +20,14 @@ const DeleteProductModal = ({ productDetails, setProducts }) => {
     setOpen(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (event) => {
     setProducts((prev) => {
       const updatedProducts = prev.filter(
         (product) => product.id !== productDetails.id
       );
       return updatedProducts;
     });
-    handleClose();
+    handleClose(event);
   };
 
   return (
@@ -38,6 +38,9 @@ const DeleteProductModal = ({ productDetails, setProducts }) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        onClick={(event)=>{
+          event.stopPropagation();
+        }}
       >
         <Box sx={MODAL_STYLE}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
