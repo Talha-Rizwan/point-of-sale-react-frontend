@@ -23,8 +23,8 @@ const ProductModal = ({ name, productDetails, setProducts }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={MODAL_STYLE}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {name} Product
+          <Typography id="modal-modal-title" ßvariant="h6" component="h2">
+            {name}
           </Typography>
           <ProductForm
             name={name}

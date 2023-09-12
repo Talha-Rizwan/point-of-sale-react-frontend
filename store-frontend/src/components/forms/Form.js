@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
-const FormComponent = ({
+const Form = ({
   handleChange,
   handleSubmit,
   productData,
@@ -91,7 +91,7 @@ const FormComponent = ({
   );
 };
 
-FormComponent.propTypes = {
+Form.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   productData: PropTypes.shape({
@@ -104,4 +104,4 @@ FormComponent.propTypes = {
   getRootProps: PropTypes.func.isRequired,
 };
 
-export default FormComponent;
+export default Form;

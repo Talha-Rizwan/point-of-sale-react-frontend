@@ -1,5 +1,5 @@
-const ADD = "Add";
-const UPDATE = "Update";
+const ADD_PRODUCT = "Add Product";
+const UPDATE_PRODUCT = "Update Product";
 
 const MODAL_STYLE = {
   position: "absolute",
@@ -13,4 +13,4 @@ const MODAL_STYLE = {
   p: 4,
 };
 
-export { ADD, UPDATE, MODAL_STYLE };
+export { ADD_PRODUCT, UPDATE_PRODUCT, MODAL_STYLE };
