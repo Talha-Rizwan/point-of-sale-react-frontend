@@ -10,10 +10,13 @@ import { ADD_PRODUCT } from "../../constants";
 const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const [productData, setProductData] = useState({
     title: productDetails?.title || "",
-    price: productDetails?.price || 0,
+    price: productDetails?.price || "",
     description: productDetails?.description || "",
     image: productDetails?.image || null,
   });
+
+  const [titleError, setTitleError] = useState("");
+  const [priceError, setPriceError] = useState("");
 
   const onDrop = (acceptedFiles) => {
     const image = acceptedFiles[0];
@@ -42,10 +45,32 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProductData({ ...productData, [name]: value });
+
+    if (name === "title") {
+      if (value.trim() === "") {
+        setTitleError("Title is required");
+      } else {
+        setTitleError(null);
+      }
+    } else if (name === "price") {
+      if (!/^\d+(\.\d{1,2})?$/.test(value) || value === "0") {
+        setPriceError(
+          "Price must be a positive number with up to 2 decimal places"
+        );
+      } else {
+        setPriceError(null);
+      }
+    }
   };
 
   const handleUpdation = (e) => {
     e.preventDefault();
+
+    if (titleError !== null || priceError !== null) {
+      console.log("remove the errors to submit!");
+
+      return;
+    }
 
     setProducts((prev) => {
       const indexToUpdate = prev.findIndex(
@@ -94,6 +119,12 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const handleNewAddition = (e) => {
     e.preventDefault();
 
+    if (titleError !== null || priceError !== null) {
+      console.log("remove the errors to submit!");
+
+      return;
+    }
+
     const productId = uuidv4();
     const newProduct = { ...productData, id: productId };
 
@@ -132,6 +163,8 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
         productData={productData}
         getRootProps={getRootProps}
         getInputProps={getInputProps}
+        titleError={titleError}
+        priceError={priceError}
       />
     </div>
   );

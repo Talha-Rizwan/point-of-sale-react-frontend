@@ -7,6 +7,8 @@ const Form = ({
   productData,
   getInputProps,
   getRootProps,
+  titleError,
+  priceError,
 }) => {
   const titleInputRef = useRef(null);
 
@@ -32,23 +34,23 @@ const Form = ({
           value={productData.title}
           onChange={handleChange}
           className="w-full p-2 "
-          required
           ref={titleInputRef}
         />
+        {titleError && <p className="text-red-500">{titleError}</p>}
       </div>
       <div className="mb-4">
         <label htmlFor="name" className="block font-bold mb-2">
           Price ($):
         </label>
         <input
-          type="number"
+          type="text"
           id="price"
           name="price"
           value={productData.price}
           onChange={handleChange}
           className="w-full p-2"
-          required
         />
+        {priceError && <p className="text-red-500">{priceError}</p>}
       </div>
       <div className="mb-4">
         <label htmlFor="description" className="block font-bold mb-2">
@@ -102,6 +104,8 @@ Form.propTypes = {
   }).isRequired,
   getInputProps: PropTypes.func.isRequired,
   getRootProps: PropTypes.func.isRequired,
+  titleError: PropTypes.string,
+  priceError: PropTypes.string
 };
 
 export default Form;
