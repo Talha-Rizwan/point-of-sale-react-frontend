@@ -9,8 +9,16 @@ import { MODAL_STYLE } from "../../constants";
 
 const DeleteProductModal = ({ productDetails, setProducts }) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleOpen = (event) => {
+    event.stopPropagation();
+    setOpen(true);
+  };
+
+  const handleClose = (event) => {
+    event.stopPropagation();
+    setOpen(false);
+  };
 
   const handleDelete = () => {
     setProducts((prev) => {

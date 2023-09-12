@@ -10,12 +10,22 @@ import { MODAL_STYLE } from "../../constants";
 
 const ProductModal = ({ name, productDetails, setProducts }) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleOpen = (event) => {
+    event.stopPropagation();
+    setOpen(true);
+  };
+
+  const handleClose = (event) => {
+    event.stopPropagation();
+    setOpen(false);
+  };
 
   return (
     <div className="flex justify-center m-2">
-      <Button onClick={handleOpen}>{name}</Button>
+      <Button onClick={handleOpen} className="test">
+        {name}
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
