@@ -1,18 +1,28 @@
-import { createStore } from 'redux'
+import { createStore } from "redux";
 
-const counterReducer = (state = { products: [] }, action) =>{
-    if (action.type === 'getProducts'){
-        return {
-            products: action.data
-        }
-    }
-    if (action.type === 'addProduct'){
-        return {
-            products: [...state.products, action.data]
-        }
-    }
-    return state;
-}
+const counterReducer = (state = { products: [] }, action) => {
+  if (action.type === "getProducts") {
+    return {
+      products: action.data,
+    };
+  }
+  if (action.type === "addProduct") {
+    return {
+      products: [...state.products, action.data],
+    };
+  }
+  if (action.type === "updateProduct") {
+    return {
+      products: action.data,
+    };
+  }
+  if (action.type === "deleteProduct") {
+    return {
+      products: action.data,
+    };
+  }
+  return state;
+};
 
 const store = createStore(counterReducer);
 

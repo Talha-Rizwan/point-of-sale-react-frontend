@@ -3,19 +3,13 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
 import { v4 as uuidv4 } from "uuid";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Form from "./Form";
 import { ADD_PRODUCT } from "../../constants";
 
 const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
-  
-  const dispatch = useDispatch()
-  // const newProducts = useSelector(state => state.products);
-
-  const addProduct = (item) => {
-    dispatch({type: 'addProduct', data: item });
-  }
+  const dispatch = useDispatch();
 
   const [productData, setProductData] = useState({
     title: productDetails?.title || "",
@@ -78,6 +72,10 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const handleUpdation = (e) => {
     e.preventDefault();
 
+    const updateProduct = (items) => {
+      dispatch({ type: "updateProduct", data: items });
+    };
+
     if (
       !(
         (errors.title === "" || errors.title === null) &&
@@ -99,6 +97,7 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
           ...updatedProducts[indexToUpdate],
           ...productData,
         };
+        updateProduct(updatedProducts);
         return updatedProducts;
       }
       return prev;
@@ -135,6 +134,10 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const handleNewAddition = (e) => {
     e.preventDefault();
 
+    const addProduct = (item) => {
+      dispatch({ type: "addProduct", data: item });
+    };
+
     if (productData.title.trim() === "") {
       setErrors((prev) => ({ ...prev, title: "Title is required" }));
     }
@@ -155,7 +158,7 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
       .then((response) => {
         if (response.status === 200) {
           setProducts((prev) => [...prev, newProduct]);
-          addProduct(newProduct)
+          addProduct(newProduct);
           setProductData({
             title: "",
             price: "",
