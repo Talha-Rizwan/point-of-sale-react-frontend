@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import ProductForm from "./ProductForm";
 import { MODAL_STYLE } from "../../constants";
 
-const ProductModal = ({ name, productDetails, setProducts }) => {
+const ProductModal = ({ name, productDetails }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = (event) => {
@@ -40,7 +40,6 @@ const ProductModal = ({ name, productDetails, setProducts }) => {
           <ProductForm
             name={name}
             productDetails={productDetails}
-            setProducts={setProducts}
             closeModal={handleClose}
           />
         </Box>
@@ -50,7 +49,6 @@ const ProductModal = ({ name, productDetails, setProducts }) => {
 };
 
 ProductModal.propTypes = {
-  setProducts: PropTypes.func.isRequired,
   productDetails: PropTypes.object,
   name: PropTypes.string.isRequired,
 };

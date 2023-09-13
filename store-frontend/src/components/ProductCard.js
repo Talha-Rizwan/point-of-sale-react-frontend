@@ -6,7 +6,7 @@ import ProductModal from "./forms/ProductModal";
 import DeleteProductModal from "./forms/DeleteProductModal";
 import { UPDATE_PRODUCT } from "../constants";
 
-const ProductCard = ({ product, setProducts }) => {
+const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   return (
     <div
@@ -27,15 +27,8 @@ const ProductCard = ({ product, setProducts }) => {
         <span className="text-xs ">Price : ${product?.price}</span>
       </div>
       <div className="flex justify-end m-2">
-        <ProductModal
-          name={UPDATE_PRODUCT}
-          productDetails={product}
-          setProducts={setProducts}
-        />
-        <DeleteProductModal
-          productDetails={product}
-          setProducts={setProducts}
-        />
+        <ProductModal name={UPDATE_PRODUCT} productDetails={product} />
+        <DeleteProductModal productDetails={product} />
       </div>
     </div>
   );
@@ -48,7 +41,6 @@ ProductCard.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
-  setProducts: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

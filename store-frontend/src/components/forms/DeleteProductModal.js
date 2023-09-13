@@ -4,18 +4,18 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { MODAL_STYLE } from "../../constants";
 
-const DeleteProductModal = ({ productDetails, setProducts }) => {
+const DeleteProductModal = ({ productDetails }) => {
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+  const [open, setOpen] = useState(false);
 
   const deleteProduct = (items) => {
     dispatch({ type: "deleteProduct", data: items });
   };
-
-  const [open, setOpen] = useState(false);
 
   const handleOpen = (event) => {
     event.stopPropagation();
@@ -28,13 +28,10 @@ const DeleteProductModal = ({ productDetails, setProducts }) => {
   };
 
   const handleDelete = (event) => {
-    setProducts((prev) => {
-      const updatedProducts = prev.filter(
-        (product) => product.id !== productDetails.id
-      );
-      deleteProduct(updatedProducts);
-      return updatedProducts;
-    });
+    const updatedProducts = products.filter(
+      (product) => product.id !== productDetails.id
+    );
+    deleteProduct(updatedProducts);
     handleClose(event);
   };
 
@@ -70,7 +67,6 @@ DeleteProductModal.propTypes = {
   productDetails: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }),
-  setProducts: PropTypes.func.isRequired,
 };
 
 export default DeleteProductModal;

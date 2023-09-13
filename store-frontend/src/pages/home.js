@@ -10,7 +10,6 @@ import { ADD_PRODUCT } from "../constants";
 const Home = () => {
   const dispatch = useDispatch();
   const newProducts = useSelector((state) => state.products);
-  const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredItems = newProducts?.filter(
@@ -23,13 +22,10 @@ const Home = () => {
     dispatch({ type: "getProducts", data: items });
   };
 
-  console.log(products);
-
   useEffect(() => {
     axios
       .get("https://fakestoreapi.com/products")
       .then((response) => {
-        setProducts(response.data);
         getProducts(response.data);
       })
       .catch((error) => {
@@ -45,8 +41,8 @@ const Home = () => {
   return (
     <div>
       <SearchBar setSearchInput={handleSearchChange} />
-      <ProductModal name={ADD_PRODUCT} setProducts={setProducts} />
-      <Products filteredItems={filteredItems} setProducts={setProducts} />
+      <ProductModal name={ADD_PRODUCT} />
+      <Products filteredItems={filteredItems} />
     </div>
   );
 };

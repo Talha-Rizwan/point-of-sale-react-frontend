@@ -3,21 +3,20 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Form from "./Form";
 import { ADD_PRODUCT } from "../../constants";
 
-const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
+const ProductForm = ({ name, productDetails, closeModal }) => {
   const dispatch = useDispatch();
-
+  const products = useSelector((state) => state.products);
   const [productData, setProductData] = useState({
     title: productDetails?.title || "",
     price: productDetails?.price || "",
     description: productDetails?.description || "",
     image: productDetails?.image || null,
   });
-
   const [errors, setErrors] = useState({
     title: "",
     price: "",
@@ -82,26 +81,22 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
         (errors.price === "" || errors.price === null)
       )
     ) {
-      console.log("remove the errors to submit!");
+      console.log("remove errors to submit!");
       return;
     }
 
-    setProducts((prev) => {
-      const indexToUpdate = prev.findIndex(
-        (product) => product.id === productDetails.id
-      );
+    const indexToUpdate = products.findIndex(
+      (product) => product.id === productDetails.id
+    );
 
-      if (indexToUpdate !== -1) {
-        const updatedProducts = [...prev];
-        updatedProducts[indexToUpdate] = {
-          ...updatedProducts[indexToUpdate],
-          ...productData,
-        };
-        updateProduct(updatedProducts);
-        return updatedProducts;
-      }
-      return prev;
-    });
+    if (indexToUpdate !== -1) {
+      const updatedProducts = [...products];
+      updatedProducts[indexToUpdate] = {
+        ...updatedProducts[indexToUpdate],
+        ...productData,
+      };
+      updateProduct(updatedProducts);
+    }
 
     axios
       .put(
@@ -141,6 +136,7 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
     if (productData.title.trim() === "") {
       setErrors((prev) => ({ ...prev, title: "Title is required" }));
     }
+    
     if (productData.price === "") {
       setErrors((prev) => ({ ...prev, price: "price is required" }));
     }
@@ -157,7 +153,6 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
       .post("https://fakestoreapi.com/products", newProduct)
       .then((response) => {
         if (response.status === 200) {
-          setProducts((prev) => [...prev, newProduct]);
           addProduct(newProduct);
           setProductData({
             title: "",
@@ -205,7 +200,6 @@ ProductForm.propTypes = {
     image: PropTypes.string,
   }),
   name: PropTypes.string.isRequired,
-  setProducts: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 

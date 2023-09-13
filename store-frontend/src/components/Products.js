@@ -3,18 +3,12 @@ import PropTypes from "prop-types";
 
 import ProductCard from "./ProductCard";
 
-const Products = ({ filteredItems, setProducts }) => (
+const Products = ({ filteredItems }) => (
   <div className="max-w-6xl p-6 mx-auto">
     {filteredItems.length !== 0 ? (
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredItems.map((product) => {
-          return (
-            <ProductCard
-              key={product.id}
-              product={product}
-              setProducts={setProducts}
-            />
-          );
+          return <ProductCard key={product.id} product={product} />;
         })}
       </div>
     ) : (
@@ -31,7 +25,6 @@ Products.propTypes = {
       price: PropTypes.number.isRequired,
     })
   ).isRequired,
-  setProducts: PropTypes.func.isRequired,
 };
 
 export default Products;
