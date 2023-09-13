@@ -66,9 +66,13 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
   const handleUpdation = (e) => {
     e.preventDefault();
 
-    if (titleError !== null || priceError !== null) {
+    if (
+      !(
+        (titleError === "" || titleError === null) &&
+        (priceError === "" || priceError === null)
+      )
+    ) {
       console.log("remove the errors to submit!");
-
       return;
     }
 
@@ -113,11 +117,18 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
       .catch((error) => {
         console.error("Error :", error);
       });
-    closeModal();
+    closeModal(e);
   };
 
   const handleNewAddition = (e) => {
     e.preventDefault();
+
+    if (productData.title.trim() === "") {
+      setTitleError("Title is required");
+    }
+    if (productData.price === "") {
+      setPriceError("Price is required");
+    }
 
     if (titleError !== null || priceError !== null) {
       console.log("remove the errors to submit!");
@@ -145,7 +156,7 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
         alert("Error submitting data!");
         console.error("Error :", error);
       });
-    closeModal();
+    closeModal(e);
   };
 
   const handleSubmit = () => {
