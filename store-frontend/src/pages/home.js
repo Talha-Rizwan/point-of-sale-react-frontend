@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
 import ProductModal from "../components/forms/ProductModal";
-import { ADD_PRODUCT } from "../constants";
+import { ADD_PRODUCT, GET_PRODUCTS } from "../constants";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Home = () => {
   );
 
   const getProducts = (items) => {
-    dispatch({ type: "getProducts", data: items });
+    dispatch({ type: GET_PRODUCTS, data: items });
   };
 
   useEffect(() => {
