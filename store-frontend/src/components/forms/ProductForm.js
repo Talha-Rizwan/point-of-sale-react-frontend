@@ -15,8 +15,10 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
     image: productDetails?.image || null,
   });
 
-  const [titleError, setTitleError] = useState("");
-  const [priceError, setPriceError] = useState("");
+  const [errors, setErrors] = useState({
+    title: "",
+    price: "",
+  });
 
   const onDrop = (acceptedFiles) => {
     const image = acceptedFiles[0];
@@ -30,7 +32,7 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
         if (img.width <= 200 && img.height <= 200) {
           setProductData({ ...productData, image });
         } else {
-          alert("Image dimensions must be 200x200 pixels or smaller.");
+          console.log("Image dimensions must be 200x200 pixels or smaller.");
         }
       };
     };
@@ -48,17 +50,18 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
 
     if (name === "title") {
       if (value.trim() === "") {
-        setTitleError("Title is required");
+        setErrors((prev) => ({ ...prev, title: "Title is required" }));
       } else {
-        setTitleError(null);
+        setErrors((prev) => ({ ...prev, title: null }));
       }
     } else if (name === "price") {
       if (!/^\d+(\.\d{1,2})?$/.test(value) || value === "0") {
-        setPriceError(
-          "Price must be a positive number with up to 2 decimal places"
-        );
+        setErrors((prev) => ({
+          ...prev,
+          price: "Price must be a positive number with up to 2 decimal places",
+        }));
       } else {
-        setPriceError(null);
+        setErrors((prev) => ({ ...prev, price: null }));
       }
     }
   };
@@ -68,8 +71,8 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
 
     if (
       !(
-        (titleError === "" || titleError === null) &&
-        (priceError === "" || priceError === null)
+        (errors.title === "" || errors.title === null) &&
+        (errors.price === "" || errors.price === null)
       )
     ) {
       console.log("remove the errors to submit!");
@@ -124,15 +127,14 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
     e.preventDefault();
 
     if (productData.title.trim() === "") {
-      setTitleError("Title is required");
+      setErrors((prev) => ({ ...prev, title: "Title is required" }));
     }
     if (productData.price === "") {
-      setPriceError("Price is required");
+      setErrors((prev) => ({ ...prev, price: "price is required" }));
     }
 
-    if (titleError !== null || priceError !== null) {
+    if (errors.title !== null || errors.price !== null) {
       console.log("remove the errors to submit!");
-
       return;
     }
 
@@ -174,8 +176,8 @@ const ProductForm = ({ name, productDetails, setProducts, closeModal }) => {
         productData={productData}
         getRootProps={getRootProps}
         getInputProps={getInputProps}
-        titleError={titleError}
-        priceError={priceError}
+        titleError={errors.title}
+        priceError={errors.price}
       />
     </div>
   );
