@@ -100,7 +100,7 @@ Form.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string,
-    image: PropTypes.object,
+    image: PropTypes.string,
   }).isRequired,
   getInputProps: PropTypes.func.isRequired,
   getRootProps: PropTypes.func.isRequired,

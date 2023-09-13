@@ -189,7 +189,7 @@ ProductForm.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string,
-    image: PropTypes.object,
+    image: PropTypes.string,
   }),
   name: PropTypes.string.isRequired,
   setProducts: PropTypes.func.isRequired,
