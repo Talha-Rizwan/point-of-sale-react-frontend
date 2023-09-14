@@ -3,7 +3,7 @@ import {
   ADD_PRODUCTS,
   UPDATE_PRODUCTS,
   DELETE_PRODUCTS,
-} from "../constants";
+} from "./types";
 
 export function getProductAction(items) {
   return {

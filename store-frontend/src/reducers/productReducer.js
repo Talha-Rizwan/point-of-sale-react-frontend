@@ -3,7 +3,7 @@ import {
   GET_PRODUCTS,
   DELETE_PRODUCTS,
   UPDATE_PRODUCTS,
-} from "../constants";
+} from "../actions/types";
 
 const productReducer = (state = { products: [] }, action) => {
   if (action.type === GET_PRODUCTS) {
