@@ -1,4 +1,3 @@
-import { createStore } from "redux";
 import {
   ADD_PRODUCTS,
   GET_PRODUCTS,
@@ -6,7 +5,7 @@ import {
   UPDATE_PRODUCTS,
 } from "../constants";
 
-const counterReducer = (state = { products: [] }, action) => {
+const productReducer = (state = { products: [] }, action) => {
   if (action.type === GET_PRODUCTS) {
     return {
       products: action.data,
@@ -30,6 +29,4 @@ const counterReducer = (state = { products: [] }, action) => {
   return state;
 };
 
-const store = createStore(counterReducer);
-
-export default store;
+export default productReducer;

@@ -4,8 +4,11 @@ import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_PRODUCTS, UPDATE_PRODUCTS } from "../../constants";
 
+import {
+  addProductAction,
+  updateProductAction,
+} from "../../actions/productActions";
 import Form from "./Form";
 import { ADD_PRODUCT } from "../../constants";
 
@@ -73,7 +76,7 @@ const ProductForm = ({ name, productDetails, closeModal }) => {
     e.preventDefault();
 
     const updateProduct = (items) => {
-      dispatch({ type: UPDATE_PRODUCTS, data: items });
+      dispatch(updateProductAction(items));
     };
 
     if (
@@ -131,13 +134,13 @@ const ProductForm = ({ name, productDetails, closeModal }) => {
     e.preventDefault();
 
     const addProduct = (item) => {
-      dispatch({ type: ADD_PRODUCTS, data: item });
+      dispatch(addProductAction(item));
     };
 
     if (productData.title.trim() === "") {
       setErrors((prev) => ({ ...prev, title: "Title is required" }));
     }
-    
+
     if (productData.price === "") {
       setErrors((prev) => ({ ...prev, price: "price is required" }));
     }

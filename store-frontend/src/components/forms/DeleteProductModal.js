@@ -5,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { DELETE_PRODUCTS } from "../../constants";
 
+import { deleteProductAction } from "../../actions/productActions";
 import { MODAL_STYLE } from "../../constants";
 
 const DeleteProductModal = ({ productDetails }) => {
@@ -15,7 +15,7 @@ const DeleteProductModal = ({ productDetails }) => {
   const [open, setOpen] = useState(false);
 
   const deleteProduct = (items) => {
-    dispatch({ type: DELETE_PRODUCTS, data: items });
+    dispatch(deleteProductAction(items));
   };
 
   const handleOpen = (event) => {
