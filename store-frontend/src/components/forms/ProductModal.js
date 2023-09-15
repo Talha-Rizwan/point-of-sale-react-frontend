@@ -6,7 +6,8 @@ import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 
 import ProductForm from "./ProductForm";
-import { MODAL_STYLE } from "../../constants";
+import { MODAL_STYLE, SUBSCRIPTION_FORM } from "../../constants";
+import SubscriptionForm from "./SubscriptionForm";
 
 const ProductModal = ({ name, productDetails }) => {
   const [open, setOpen] = useState(false);
@@ -37,11 +38,15 @@ const ProductModal = ({ name, productDetails }) => {
           <Typography id="modal-modal-title" ßvariant="h6" component="h2">
             {name}
           </Typography>
-          <ProductForm
-            name={name}
-            productDetails={productDetails}
-            closeModal={handleClose}
-          />
+          {name === SUBSCRIPTION_FORM ? (
+            <SubscriptionForm setOpen={setOpen} />
+          ) : (
+            <ProductForm
+              name={name}
+              productDetails={productDetails}
+              closeModal={handleClose}
+            />
+          )}
         </Box>
       </Modal>
     </div>

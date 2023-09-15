@@ -1,6 +1,6 @@
 const ADD_PRODUCT = "Add Product";
 const UPDATE_PRODUCT = "Update Product";
-
+const SUBSCRIPTION_FORM = "Subscription Form";
 const MODAL_STYLE = {
   position: "absolute",
   top: "50%",
@@ -13,9 +13,4 @@ const MODAL_STYLE = {
   p: 4,
 };
 
-
-export {
-  ADD_PRODUCT,
-  UPDATE_PRODUCT,
-  MODAL_STYLE,
-};
+export { ADD_PRODUCT, UPDATE_PRODUCT, SUBSCRIPTION_FORM, MODAL_STYLE };

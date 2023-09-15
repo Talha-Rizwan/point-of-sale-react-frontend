@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "../components/SearchBar";
 import Products from "../components/Products";
 import ProductModal from "../components/forms/ProductModal";
-import { ADD_PRODUCT } from "../constants";
+import { ADD_PRODUCT, SUBSCRIPTION_FORM } from "../constants";
 import { getProductAction } from "../actions/productActions";
 
 const Home = () => {
@@ -41,6 +41,7 @@ const Home = () => {
 
   return (
     <div>
+      <ProductModal name={SUBSCRIPTION_FORM} />
       <SearchBar setSearchInput={handleSearchChange} />
       <ProductModal name={ADD_PRODUCT} />
       <Products filteredItems={filteredItems} />

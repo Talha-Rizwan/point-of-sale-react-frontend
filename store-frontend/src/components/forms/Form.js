@@ -85,7 +85,7 @@ const Form = ({
       </div>
       <button
         type="submit"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded "
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-3 rounded"
       >
         Submit
       </button>
@@ -105,7 +105,7 @@ Form.propTypes = {
   getInputProps: PropTypes.func.isRequired,
   getRootProps: PropTypes.func.isRequired,
   titleError: PropTypes.string,
-  priceError: PropTypes.string
+  priceError: PropTypes.string,
 };
 
 export default Form;
