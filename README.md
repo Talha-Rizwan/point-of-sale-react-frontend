@@ -25,7 +25,8 @@ Internet connectivity to fetch data from the Fake Store API.
 
 React
 Axios for API requests
-Tailwind CSS for styling
+Tailwind CSS and material UI for styling
+React-Redux for state management
 
 
 ## Getting Started
